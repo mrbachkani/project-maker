@@ -35,11 +35,12 @@ async function scanFile(filePath) {
           `// Automatically generated fetch for ${source}`,
           `// TODO: Replace the following with your backend integration code.`,
           `// The "${source}" annotation suggests this component should load data from ${hint || source}.`,
+          `// Provide loading and error states so the UI can react to backend connectivity issues.`,
           `// Example (Firebase Firestore):`,
           `// import { getFirestore, collection, getDocs } from 'firebase/firestore';`,
           `// const db = getFirestore();`,
           `// const querySnapshot = await getDocs(collection(db, '${source}'));`,
-          `// setState(querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))));`,
+          `// setState(querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));`,
           `//`,
           `// Example (Supabase):`,
           `// import { createClient } from '@supabase/supabase-js';`,
@@ -52,6 +53,19 @@ async function scanFile(filePath) {
           `// } else {`,
           `//   setState(data);`,
           `// }`,
+          `//`,
+          `// Example (REST API with fetch):`,
+          `// try {`,
+          `//   const response = await fetch('/api/${source}');`,
+          `//   if (!response.ok) throw new Error(\`Request failed with ${response.status}\`);`,
+          `//   const payload = await response.json();`,
+          `//   setState(payload);`,
+          `// } catch (err) {`,
+          `//   console.error(err);`,
+          `//   setError(err);`,
+          `// }`,
+          `//`,
+          `// Keep your data access in a dedicated hook or service so it can be reused by other components.`,
           '',
         ];
         placeholder.forEach((pl) => newLines.push(pl));
@@ -71,7 +85,13 @@ async function walkDir(dir) {
     const fullPath = path.join(dir, entry.name);
     if (entry.isDirectory()) {
       await walkDir(fullPath);
-    } else if (entry.name.endsWith('.js') || entry.name.endsWith('.jsx')) {
+    } else if (
+      entry.name.endsWith('.js') ||
+      entry.name.endsWith('.jsx') ||
+      entry.name.endsWith('.ts') ||
+      entry.name.endsWith('.tsx') ||
+      entry.name.endsWith('.mjs')
+    ) {
       await scanFile(fullPath);
     }
   }
