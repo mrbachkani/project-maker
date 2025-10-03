@@ -1,6 +1,6 @@
-# Windsurf‑Ready Guide
+# Windsurf-Ready Guide
 
-The Project Maker includes configuration files to take advantage of the Windsurf IDE and its Cascade AI agent.  Following this guide ensures that your generated projects are fully Windsurf‑ready and able to leverage the power of agentic development.
+The Project Maker includes configuration files to take advantage of the Windsurf IDE and its Cascade AI agent.  Following this guide ensures that your generated projects are fully Windsurf-ready and able to leverage the power of agentic development.
 
 ## Rules
 
@@ -8,7 +8,7 @@ The `.windsurf/rules/` folder contains markdown files that define coding guideli
 
 ## Workflows
 
-Reusable multi‑step tasks are defined in the `.windsurf/workflows/` folder.  Each file is written in plain markdown with numbered instructions and code blocks.  You can invoke these workflows from Windsurf chat using a slash command matching the filename.  For example, run `/test-and-lint` to lint and test your code, or `/bind-backend` to wire data‑fetching annotations to your backend.
+Reusable multi-step tasks are defined in the `.windsurf/workflows/` folder.  Each file is written in plain markdown with numbered instructions and code blocks.  You can invoke these workflows from Windsurf chat using a slash command matching the filename.  For example, run `/test-and-lint` to lint and test your code, `/bind-backend` to wire data-fetching annotations to your backend, or `/full-stack-check` to validate frontend ↔ backend flows end-to-end.
 
 ## Memories
 
@@ -20,7 +20,7 @@ Important project documentation and context can be saved as Windsurf memories.  
 2. Review the rules under `.windsurf/rules/` to understand the project conventions.
 3. Use `/help` in the chat to list available workflows.
 4. Run `/test-and-lint` before committing to ensure your code passes the test suite and linter.
-5. When you add new components that fetch data, run `/bind-backend` to wire them to your backend.
+5. When you add new components that fetch data, run `/bind-backend` to wire them to your backend and follow up with `/full-stack-check` to ensure the UI and API stay in sync.
 6. When you are ready to deploy, run `/deploy` (works best for static websites; see the workflow file for details).
 
 For more information on Windsurf features, consult the official documentation at <https://windsurf.dev>.

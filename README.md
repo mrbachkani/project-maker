@@ -19,7 +19,7 @@ This repository provides a collection of ready‑made project scaffolds with bui
 - **Shared `components‑library/`** with reusable UI components for React projects.
 - **`scripts/bind-backend.js`** to automatically wire data sources into components annotated with `@fetch`.
 - **`.windsurf/` configuration** with rules and workflows so the Windsurf IDE knows how to run tests, bind backends, deploy and reuse components.
-- **Documentation templates** for PRDs, architecture, and project rules.
+- **Documentation templates** for PRDs, task breakdowns, architecture, and project rules.
 - **Optional Dockerfiles and CI pipelines** per template.
 - A **script to synchronise new reusable components** into the central library.
 

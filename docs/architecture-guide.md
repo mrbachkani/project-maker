@@ -35,3 +35,11 @@ This document describes recommended architectural patterns and best practices fo
 - Provide a `Dockerfile` for containerised deployment and a `docker-compose.yml` for local development where appropriate.
 - Include CI/CD pipeline definitions (e.g. GitHub Actions workflows) in a `.github/workflows/` folder.
 - Use environment variables for all configuration and secrets in deployment environments (e.g. staging, production).
+
+## Full-Stack Integration
+
+- Treat the frontend and backend as a contract.  Define shared TypeScript types or OpenAPI schemas in a `contracts/` folder and import them on both sides.
+- Use adapter modules (`services/api.ts`, `lib/backend.ts`) to translate raw API responses into view models consumed by components.
+- Record integration assumptions (timeouts, retries, auth scopes) in the PRD and task breakdown so agents can reason about failure modes.
+- Include end-to-end tests (Playwright/Cypress) that exercise the critical journeys against a running backend.  See the `/full-stack-check` workflow for the recommended steps.
+- Capture monitoring requirements (metrics, logs, tracing) during design so they are built alongside features.

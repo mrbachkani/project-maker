@@ -13,13 +13,23 @@ const readline = require('readline');
 
 const templatesDir = path.join(__dirname, '..', 'templates');
 
+const SKIP_DIRECTORIES = new Set(['node_modules']);
+
 async function copyDir(src, dest) {
   await fs.promises.mkdir(dest, { recursive: true });
   const entries = await fs.promises.readdir(src, { withFileTypes: true });
   for (const entry of entries) {
+    if (SKIP_DIRECTORIES.has(entry.name)) {
+      continue;
+    }
+
     const srcPath = path.join(src, entry.name);
     const destPath = path.join(dest, entry.name);
-    if (entry.isDirectory()) {
+
+    if (entry.isSymbolicLink()) {
+      const linkTarget = await fs.promises.readlink(srcPath);
+      await fs.promises.symlink(linkTarget, destPath);
+    } else if (entry.isDirectory()) {
       await copyDir(srcPath, destPath);
     } else {
       await fs.promises.copyFile(srcPath, destPath);
